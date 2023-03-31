@@ -1,5 +1,6 @@
 import { ModelStatic } from 'sequelize';
 import Team from '../models/TeamModel';
+import InTeam from '../interfaces/interfaceTeam';
 
 class TeamService {
   constructor(private team: ModelStatic<Team>) {
@@ -8,6 +9,12 @@ class TeamService {
 
   async all(): Promise<Team[]> {
     const res = await this.team.findAll();
+    return res;
+  }
+
+  async getId(id: number): Promise<InTeam | null> {
+    const res = await this.team.findByPk(id);
+
     return res;
   }
 }

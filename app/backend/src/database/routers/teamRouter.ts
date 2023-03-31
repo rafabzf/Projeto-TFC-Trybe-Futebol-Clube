@@ -8,5 +8,6 @@ const serviceTeam = new TeamService(Team);
 const controllerTeam = new TeamController(serviceTeam);
 
 route.get('/', controllerTeam.all);
+route.get('/:id', controllerTeam.getId);
 
 export default route;

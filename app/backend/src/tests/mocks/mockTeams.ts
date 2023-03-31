@@ -1,4 +1,4 @@
-import Team from "../../database/models/Team";
+import Team from "../../database/models/TeamModel";
 
 const all = [
   {
