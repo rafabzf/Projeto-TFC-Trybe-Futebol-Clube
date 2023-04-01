@@ -1,9 +1,10 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
+// @ts-ignore
 import chaiHttp from 'chai-http';
 import { app } from '../app';
 import Team from '../database/models/TeamModel';
-import { all } from './mocks/mockTeams';
+import { all } from './mocks/mockTeams.mock';
 import { Response } from 'superagent';
 
 chai.use(chaiHttp);
