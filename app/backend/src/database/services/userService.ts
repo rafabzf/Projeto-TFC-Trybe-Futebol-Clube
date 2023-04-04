@@ -15,7 +15,7 @@ class UserService {
       where: { email },
     });
 
-    if (!res) {
+    if (!res || (password.length < 6)) {
       return null;
     }
 

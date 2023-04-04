@@ -16,7 +16,7 @@ class UserController {
     if (!res) {
       return response
         .status(401)
-        .json({ message: 'Email or password invalid' });
+        .json({ message: 'Invalid email or password' });
     }
 
     const tok = token.tokenGenerator({

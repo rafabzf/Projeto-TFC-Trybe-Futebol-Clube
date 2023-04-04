@@ -9,6 +9,12 @@ const prop = async (request: Request, response: Response, next: NextFunction) =>
       .json({ message: 'All fields must be filled' });
   }
 
+  if (!(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gi))) {
+    return response
+      .status(401)
+      .json({ message: 'Invalid email or password' });
+  }
+
   next();
 };
 

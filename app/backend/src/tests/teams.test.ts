@@ -11,6 +11,10 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Testando model de Teams', () => {
+  afterEach(() => {
+    sinon.restore();
+  })
+
   it('Testa se retorna todos os times', async () => {
     sinon.stub(Team, 'findAll')
     .resolves(all);
@@ -21,5 +25,18 @@ describe('Testando model de Teams', () => {
 
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.deep.equal(all);
+  });
+
+  
+  it('Testa se retorna o time pelo id', async () => {
+    sinon.stub(Team, 'findByPk')
+    .resolves(all[0]);
+
+    const res: Response = await chai
+    .request(app)
+    .get('/teams/1');
+
+    expect(res.status).to.be.equal(200);
+    expect(res.body).to.be.deep.equal(all[0]);
   });
 });
