@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import User from '../models/userModel';
 import UserService from '../services/userService';
-import UserController from '../controllers/userController';
+import UserController from '../controllers/UserController';
 import loginValidation from '../middlewares/loginValidation';
 import tokenVerification from '../middlewares/tokenVerification';
 

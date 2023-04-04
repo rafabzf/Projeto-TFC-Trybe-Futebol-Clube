@@ -35,7 +35,7 @@ class UserController {
 
     response
       .status(200)
-      .json(u);
+      .json({ role: u.role });
   };
 }
 
