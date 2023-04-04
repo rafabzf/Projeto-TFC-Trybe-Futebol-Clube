@@ -2,13 +2,14 @@ import * as bcrypt from 'bcryptjs';
 import { ModelStatic } from 'sequelize';
 import InLogin from '../interfaces/interfaceLogin';
 import User from '../models/userModel';
+import InUser from '../interfaces/interfaceUser';
 
 class UserService {
   constructor(private user: ModelStatic<User>) {
     this.user = user;
   }
 
-  async loginVerification(user: InLogin): Promise<InLogin | null> {
+  async loginVerification(user: InLogin): Promise<InUser | null> {
     const { email, password } = user;
 
     const res = await this.user.findOne({

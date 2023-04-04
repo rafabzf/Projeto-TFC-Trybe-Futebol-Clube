@@ -22,11 +22,20 @@ class UserController {
     const token = tokenAuth.tokenGenerator({
       email,
       password,
+      role: res.role,
     });
 
     return response
       .status(200)
       .json({ token });
+  };
+
+  tokenRole = async (request: Request, response: Response) => {
+    const u = request.body.data;
+
+    response
+      .status(200)
+      .json(u);
   };
 }
 
