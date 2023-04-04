@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import token from '../auth/token';
+import tokenAuth from '../auth/tokenAuth';
 import UserService from '../services/userService';
 
 class UserController {
@@ -19,14 +19,14 @@ class UserController {
         .json({ message: 'Invalid email or password' });
     }
 
-    const tok = token.tokenGenerator({
+    const token = tokenAuth.tokenGenerator({
       email,
       password,
     });
 
     return response
       .status(200)
-      .json({ tok });
+      .json({ token });
   };
 }
 

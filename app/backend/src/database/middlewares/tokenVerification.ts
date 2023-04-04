@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import token from '../auth/token';
+import tokenAuth from '../auth/tokenAuth';
 
 const tokenVerify = async (request: Request, response: Response, next: NextFunction) => {
   const auth = request.header('Authorization');
@@ -10,7 +10,7 @@ const tokenVerify = async (request: Request, response: Response, next: NextFunct
       .json({ message: 'Token not found' });
   }
 
-  const tok = token.tokenVerification(auth);
+  const tok = tokenAuth.tokenVerification(auth);
 
   request.body.data = tok;
 
