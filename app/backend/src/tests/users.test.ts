@@ -1,7 +1,7 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
-import chaiHttp from 'chai-http';
+import chaiHttp = require('chai-http');
 import { app } from '../app';
 import User from '../database/models/userModel';
 import { user } from './mocks/mockUsers.mock';
@@ -86,7 +86,7 @@ describe('Testa a model users', () => {
     .send({ email: 'admin@admin.com', password: 'admin1' }));
 
     const res: Response = (await chai.request(app)
-    .post('/login/role')
+    .get('/login/role')
     .set('Authorization', token.body.token));
 
     expect(res.status).to.be.equal(200);

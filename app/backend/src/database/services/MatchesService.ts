@@ -1,9 +1,13 @@
 import InMatch from '../interfaces/interfaceMatches';
 import Match from '../models/MatchesModel';
 import Team from '../models/TeamModel';
+import InTeam from '../interfaces/interfaceTeam';
 
 class MatchesService {
-  constructor(private modelMatches = Match) {}
+  constructor(
+    private modelMatches = Match,
+    private modelTeam = Team,
+  ) {}
 
   async allMatches(): Promise<InMatch[]> {
     return this.modelMatches.findAll({
@@ -51,6 +55,26 @@ class MatchesService {
     );
 
     return affected;
+  }
+
+  async createMatch(match: InMatch): Promise<InMatch> {
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress } = match;
+
+    const res = await this.modelMatches.create({
+      homeTeamId,
+      homeTeamGoals,
+      awayTeamId,
+      awayTeamGoals,
+      inProgress,
+    });
+
+    return res;
+  }
+
+  async getId(id: number): Promise<InTeam | null> {
+    const res = await this.modelTeam.findByPk(id);
+
+    return res;
   }
 }
 

@@ -61,6 +61,41 @@ class MatchesController {
         .json(error);
     }
   };
+
+  exist = async (homeTeamId: string, awayTeamId: string): Promise<boolean> => {
+    const home = await this.matchesService.getId(Number(homeTeamId));
+
+    const away = await this.matchesService.getId(Number(awayTeamId));
+
+    if (!home || !away) {
+      return true;
+    }
+    return false;
+  };
+
+  createMatch = async (request: Request, response: Response) => {
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals } = request.body;
+
+    const res = await this.matchesService.createMatch({
+      homeTeamId,
+      homeTeamGoals,
+      awayTeamId,
+      awayTeamGoals,
+      inProgress: true,
+    });
+
+    const existTeam = await this.exist(homeTeamId, awayTeamId);
+
+    if (existTeam) {
+      return response
+        .status(404)
+        .json({ message: 'There is no team with such id!' });
+    }
+
+    return response
+      .status(201)
+      .json(res);
+  };
 }
 
 export default MatchesController;
