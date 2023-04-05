@@ -44,6 +44,23 @@ class MatchesController {
         .json(error);
     }
   };
+
+  up = async (request: Request, response: Response): Promise<Response> => {
+    try {
+      const { id } = request.params;
+      const { homeTeamGoals, awayTeamGoals } = request.body;
+
+      await this.matchesService.up(Number(id), homeTeamGoals, awayTeamGoals);
+
+      return response
+        .status(200)
+        .json({ message: 'Updated' });
+    } catch (error) {
+      return response
+        .status(500)
+        .json(error);
+    }
+  };
 }
 
 export default MatchesController;

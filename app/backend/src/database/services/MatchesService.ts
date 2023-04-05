@@ -27,10 +27,30 @@ class MatchesService {
     ));
   }
 
-  async finish(id: number) {
-    return this.modelMatches.update({
-      inProgress: false }, { where: { id },
-    });
+  async finish(id: number): Promise<number> {
+    const [affected] = await this.modelMatches.update(
+      {
+        inProgress: false,
+      },
+      {
+        where: { id },
+      },
+    );
+
+    return affected;
+  }
+
+  async up(id: number, homeTeam: number, awayTeam: number): Promise<number> {
+    const [affected] = await this.modelMatches.update(
+      {
+        homeTeamGoals: homeTeam, awayTeamGoals: awayTeam,
+      },
+      {
+        where: { id },
+      },
+    );
+
+    return affected;
   }
 }
 
