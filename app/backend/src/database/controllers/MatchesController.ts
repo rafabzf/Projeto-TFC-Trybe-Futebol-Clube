@@ -28,6 +28,22 @@ class MatchesController {
         .json(error);
     }
   };
+
+  finish = async (request: Request, response: Response): Promise<Response> => {
+    try {
+      const { id } = request.params;
+
+      await this.matchesService.finish(Number(id));
+
+      return response
+        .status(200)
+        .json({ message: 'Finished' });
+    } catch (error) {
+      return response
+        .status(500)
+        .json(error);
+    }
+  };
 }
 
 export default MatchesController;

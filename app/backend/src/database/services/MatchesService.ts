@@ -26,6 +26,12 @@ class MatchesService {
       (match) => match.inProgress === matchProgress,
     ));
   }
+
+  async finish(id: number) {
+    return this.modelMatches.update({
+      inProgress: false }, { where: { id },
+    });
+  }
 }
 
 export default MatchesService;
