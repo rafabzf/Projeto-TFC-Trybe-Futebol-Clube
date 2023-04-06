@@ -10,6 +10,8 @@ interface InStatsTeam {
   totalLosses: number;
   goalsFavor: number;
   goalsOwn: number;
+  goalsBalance: number;
+  efficiency: number;
   matches?: InMatch[];
   team?: InTeam;
 }

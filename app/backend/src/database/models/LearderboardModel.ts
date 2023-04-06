@@ -11,6 +11,8 @@ class LeaderBoard implements InStatsTeam {
   totalLosses: number;
   goalsFavor: number;
   goalsOwn: number;
+  goalsBalance: number;
+  efficiency: number;
   team: InTeam;
   matches: InMatch[];
   typeTeam: 'homeTeamId';
@@ -27,6 +29,8 @@ class LeaderBoard implements InStatsTeam {
     this.goalsFavor = this.favor();
     this.goalsOwn = this.own();
     this.totalGames = this.games();
+    this.goalsBalance = this.balance();
+    this.efficiency = this.efficiencyy();
   }
 
   victories(): number {
@@ -66,9 +70,7 @@ class LeaderBoard implements InStatsTeam {
   }
 
   points(): number {
-    const total = this.totalDraws + (this.totalVictories * 3);
-
-    return total;
+    return this.totalDraws + (this.totalVictories * 3);
   }
 
   favor(): number {
@@ -94,9 +96,15 @@ class LeaderBoard implements InStatsTeam {
   }
 
   games(): number {
-    const gamesTotal = this.totalDraws + this.totalLosses + this.totalVictories;
+    return this.totalDraws + this.totalLosses + this.totalVictories;
+  }
 
-    return gamesTotal;
+  balance(): number {
+    return this.goalsFavor - this.goalsOwn;
+  }
+
+  efficiencyy(): number {
+    return Number(((this.totalPoints / (this.totalGames * 3)) * 100).toFixed(2));
   }
 }
 
