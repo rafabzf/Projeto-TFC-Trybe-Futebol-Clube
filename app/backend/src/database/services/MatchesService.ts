@@ -31,8 +31,21 @@ class MatchesService {
     ));
   }
 
-  async finish(id: number): Promise<number> {
-    const [affected] = await this.modelMatches.update(
+  // async finish(id: number): Promise<number> {
+  //   const [affected] = await this.modelMatches.update(
+  //     {
+  //       inProgress: false,
+  //     },
+  //     {
+  //       where: { id },
+  //     },
+  //   );
+
+  //   return affected;
+  // }
+
+  async finish(id: number): Promise<void> {
+    await this.modelMatches.update(
       {
         inProgress: false,
       },
@@ -40,21 +53,31 @@ class MatchesService {
         where: { id },
       },
     );
-
-    return affected;
   }
 
-  async up(id: number, homeTeam: number, awayTeam: number): Promise<number> {
-    const [affected] = await this.modelMatches.update(
+  // async up(id: number, homeTeam: number, awayTeam: number): Promise<number> {
+  //   const [affected] = await this.modelMatches.update(
+  //     {
+  //       homeTeamGoals: homeTeam, awayTeamGoals: awayTeam,
+  //     },
+  //     {
+  //       where: { id },
+  //     },
+  //   );
+
+  //   return affected;
+  // }
+
+  async up(homeTeamGoals: number, awayTeamGoals: number, id: number): Promise<void> {
+    await this.modelMatches.update(
       {
-        homeTeamGoals: homeTeam, awayTeamGoals: awayTeam,
+        homeTeamGoals,
+        awayTeamGoals,
       },
       {
         where: { id },
       },
     );
-
-    return affected;
   }
 
   async createMatch(match: InMatch): Promise<InMatch> {

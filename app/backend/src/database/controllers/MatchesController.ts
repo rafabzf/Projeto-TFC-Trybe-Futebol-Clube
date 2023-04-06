@@ -29,37 +29,62 @@ class MatchesController {
     }
   };
 
-  finish = async (request: Request, response: Response): Promise<Response> => {
-    try {
-      const { id } = request.params;
+  // finish = async (request: Request, response: Response): Promise<Response> => {
+  //   try {
+  //     const { id } = request.params;
 
-      await this.matchesService.finish(Number(id));
+  //     await this.matchesService.finish(Number(id));
 
-      return response
-        .status(200)
-        .json({ message: 'Finished' });
-    } catch (error) {
-      return response
-        .status(500)
-        .json(error);
-    }
+  //     return response
+  //       .status(200)
+  //       .json({ message: 'Finished' });
+  //   } catch (error) {
+  //     return response
+  //       .status(500)
+  //       .json(error);
+  //   }
+  // };
+
+  finish = async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    await this.matchesService.finish(Number(id));
+
+    return response
+      .status(200)
+      .json({ message: 'Finished' });
   };
 
-  up = async (request: Request, response: Response): Promise<Response> => {
-    try {
-      const { id } = request.params;
-      const { homeTeamGoals, awayTeamGoals } = request.body;
+  // up = async (request: Request, response: Response): Promise<Response> => {
+  //   try {
+  //     const { id } = request.params;
+  //     const { homeTeamGoals, awayTeamGoals } = request.body;
 
-      await this.matchesService.up(Number(id), homeTeamGoals, awayTeamGoals);
+  //     await this.matchesService.up(Number(id), homeTeamGoals, awayTeamGoals);
 
-      return response
-        .status(200)
-        .json({ message: 'Updated' });
-    } catch (error) {
-      return response
-        .status(500)
-        .json(error);
-    }
+  //     return response
+  //       .status(200)
+  //       .json({ message: 'Updated' });
+  //   } catch (error) {
+  //     return response
+  //       .status(500)
+  //       .json(error);
+  //   }
+  // };
+
+  up = async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    const { homeTeamGoals, awayTeamGoals } = request.body;
+    await this.matchesService.up(
+      homeTeamGoals,
+      awayTeamGoals,
+      Number(id),
+    );
+
+    return response
+      .status(200)
+      .json({ message: 'updated' });
   };
 
   exist = async (homeTeamId: string, awayTeamId: string): Promise<boolean> => {
